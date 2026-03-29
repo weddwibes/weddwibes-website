@@ -10,10 +10,11 @@
 <title>Wedd Wibes Studio — Wedding Photography Rajkot, Gujarat</title>
 
 <!-- Favicon (tab image + Google search icon) -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<!-- Google prefers: 1) favicon-512.png as the main large icon 2) must be square, no transparent/black bg -->
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="shortcut icon" href="/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
@@ -43,7 +44,12 @@
   "@type": "LocalBusiness",
   "name": "Wedd Wibes Studio",
   "url": "https://www.weddwibes.com",
-  "logo": "https://www.weddwibes.com/photos/logo.png",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.weddwibes.com/favicon-512.png",
+    "width": 512,
+    "height": 512
+  },
   "image": "https://www.weddwibes.com/photos/logo.png",
   "description": "Premium Wedding & Portrait Photography in Rajkot, Gujarat. 300+ Couples | 6+ Years Experience.",
   "telephone": "+919904533525",
@@ -294,7 +300,7 @@
           <div><div class="portfolio-info-name">Heli &amp; Shyam</div><div class="portfolio-info-cat">Wedding — Rajkot</div></div>
           <div class="portfolio-view-icon"><svg viewBox="0 0 15 15"><path d="M2 2h5M2 2v5M13 2h-5M13 2v5M2 13h5M2 13v-5M13 13h-5M13 13v-5"/></svg></div>
         </div>
-        <div class="portfolio-count-badge">6 photos</div>
+        <div class="portfolio-count-badge">8 photos</div>
       </div>
 
       <div class="portfolio-item" data-cat="prewedding" onclick="openGallery('riki-jay')">
@@ -304,7 +310,7 @@
           <div><div class="portfolio-info-name">Nensi &amp; Aryan</div><div class="portfolio-info-cat">Pre-Wedding</div></div>
           <div class="portfolio-view-icon"><svg viewBox="0 0 15 15"><path d="M2 2h5M2 2v5M13 2h-5M13 2v5M2 13h5M2 13v-5M13 13h-5M13 13v-5"/></svg></div>
         </div>
-        <div class="portfolio-count-badge">4 photos</div>
+        <div class="portfolio-count-badge">8 photos</div>
       </div>
 
       <div class="portfolio-item" data-cat="wedding" onclick="openGallery('vairag-krisha')">
@@ -314,7 +320,7 @@
           <div><div class="portfolio-info-name">Vairag &amp; Krisha</div><div class="portfolio-info-cat">Wedding</div></div>
           <div class="portfolio-view-icon"><svg viewBox="0 0 15 15"><path d="M2 2h5M2 2v5M13 2h-5M13 2v5M2 13h5M2 13v-5M13 13h-5M13 13v-5"/></svg></div>
         </div>
-        <div class="portfolio-count-badge">5 photos</div>
+        <div class="portfolio-count-badge">8 photos</div>
       </div>
 
       <div class="portfolio-item" data-cat="prewedding" onclick="openGallery('karan-bhoomi')">
@@ -324,7 +330,7 @@
           <div><div class="portfolio-info-name">Divyaraj &amp; Aeshvari</div><div class="portfolio-info-cat">Pre-Wedding</div></div>
           <div class="portfolio-view-icon"><svg viewBox="0 0 15 15"><path d="M2 2h5M2 2v5M13 2h-5M13 2v5M2 13h5M2 13v-5M13 13h-5M13 13v-5"/></svg></div>
         </div>
-        <div class="portfolio-count-badge">4 photos</div>
+        <div class="portfolio-count-badge">8 photos</div>
       </div>
 
       <div class="portfolio-item" data-cat="engagement" onclick="openGallery('jahnvi-dev')">
@@ -334,7 +340,7 @@
           <div><div class="portfolio-info-name">Jahnvi &amp; Dev</div><div class="portfolio-info-cat">Engagement</div></div>
           <div class="portfolio-view-icon"><svg viewBox="0 0 15 15"><path d="M2 2h5M2 2v5M13 2h-5M13 2v5M2 13h5M2 13v-5M13 13h-5M13 13v-5"/></svg></div>
         </div>
-        <div class="portfolio-count-badge">4 photos</div>
+        <div class="portfolio-count-badge">8 photos</div>
       </div>
 
     </div>
@@ -707,19 +713,22 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/gallery.js"></script>
 <script src="js/main.js"></script>
 <script>
+  /* ── Scroll-to-top button ── */
   const scrollTopBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', () => {
     scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
   }, { passive: true });
 
-
+  /* ── Navigation helper functions ── */
   function storyGoHome() {
+    _historyCloseStory();
     document.getElementById('storyPage').classList.remove('open');
     document.body.style.overflow = '';
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
   }
 
   function storyGoGallery() {
+    _historyCloseStory();
     document.getElementById('storyPage').classList.remove('open');
     document.body.style.overflow = '';
     setTimeout(() => {
@@ -732,25 +741,128 @@
   }
 
   function fgGoHome() {
+    _historyCloseFG();
     document.getElementById('fullGalleryPage').classList.remove('open');
     document.body.style.overflow = '';
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
   }
 
   function fgGoGallery() {
-  document.getElementById('fullGalleryPage').classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => {
-    const el = document.getElementById('portfolio');
-    if (el) {
-      const offset = window.innerWidth <= 768 ? 56 : 80;
-      window.scrollTo({
-        top: el.offsetTop - offset,
-        behavior: 'smooth'
-      });
+    _historyCloseFG();
+    document.getElementById('fullGalleryPage').classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      const el = document.getElementById('portfolio');
+      if (el) {
+        const offset = window.innerWidth <= 768 ? 56 : 80;
+        window.scrollTo({ top: el.offsetTop - offset, behavior: 'smooth' });
+      }
+    }, 50);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     MOBILE BACK BUTTON — History API
+     Layers (stack order when all open):
+       base  → no state       (main site)
+       fg    → { layer:'fg' } (full gallery)
+       story → { layer:'story', fromFg: bool } (story page)
+       lb    → { layer:'lb' } (lightbox)
+     Android back button fires window.popstate.
+     We intercept it and close the top-most visible layer.
+  ══════════════════════════════════════════════════════════ */
+
+  /* Push a history entry whenever a layer opens */
+  function _historyPushFG() {
+    history.pushState({ layer: 'fg' }, '');
+  }
+  function _historyPushStory(fromFg) {
+    history.pushState({ layer: 'story', fromFg: !!fromFg }, '');
+  }
+  function _historyPushLB() {
+    history.pushState({ layer: 'lb' }, '');
+  }
+
+  /* Pop (go back) without triggering popstate again */
+  function _historyCloseFG()    { if (history.state?.layer === 'fg')    history.back(); }
+  function _historyCloseStory() { if (history.state?.layer === 'story') history.back(); }
+  function _historyCloseLB()    { if (history.state?.layer === 'lb')    history.back(); }
+
+  /* Patch open functions to push state */
+  const _origOpenFGPage = openFullGalleryPage;
+  window.openFullGalleryPage = function () {
+    _origOpenFGPage();
+    _historyPushFG();
+  };
+
+  const _origOpenGallery = openGallery;
+  window.openGallery = function (key) {
+    _origOpenGallery(key);
+    /* fromFg is tracked by _returnToFullGallery inside gallery.js */
+    _historyPushStory(typeof _returnToFullGallery !== 'undefined' && _returnToFullGallery);
+  };
+
+  /* openGalleryFromFull sets _returnToFullGallery before calling openGallery */
+  const _origOpenGalleryFromFull = openGalleryFromFull;
+  window.openGalleryFromFull = function (key) {
+    _origOpenGalleryFromFull(key);
+    /* openGallery is called with delay inside, pushState will fire via patched openGallery */
+  };
+
+  const _origOpenLightbox = openLightbox;
+  window.openLightbox = function (key, idx) {
+    _origOpenLightbox(key, idx);
+    _historyPushLB();
+  };
+
+  /* Patch close functions to pop state */
+  const _origCloseLightbox = closeLightbox;
+  window.closeLightbox = function () {
+    _origCloseLightbox();
+    _historyCloseLB();
+  };
+
+  const _origCloseStoryPage = closeStoryPage;
+  window.closeStoryPage = function () {
+    _origCloseStoryPage();
+    _historyCloseStory();
+  };
+
+  const _origCloseFullGalleryPage = closeFullGalleryPage;
+  window.closeFullGalleryPage = function () {
+    _origCloseFullGalleryPage();
+    _historyCloseFG();
+  };
+
+  /* Handle Android/iOS back button */
+  window.addEventListener('popstate', function (e) {
+    const state = e.state;
+
+    /* Lightbox is open → close lightbox, stay on story */
+    if (document.getElementById('lightboxPage')?.classList.contains('open')) {
+      _origCloseLightbox();
+      return;
     }
-  }, 50);
-}
+
+    /* Story page is open → go back to full gallery or main site */
+    if (document.getElementById('storyPage')?.classList.contains('open')) {
+      _origCloseStoryPage();
+      return;
+    }
+
+    /* Full gallery is open → close it, return to main site */
+    if (document.getElementById('fullGalleryPage')?.classList.contains('open')) {
+      _origCloseFullGalleryPage();
+      return;
+    }
+
+    /* Nothing special open — let the browser navigate away normally */
+  });
+
+  /* On first load: make sure history base state is set so back never
+     navigates away from the page accidentally when all layers are closed */
+  if (!history.state) {
+    history.replaceState({ layer: 'base' }, '');
+  }
 </script>
 </body>
 </html>
